@@ -29,6 +29,7 @@ from kivy.uix.gridlayout import GridLayout
 from kivy.uix.anchorlayout import AnchorLayout
 from kivy.uix.floatlayout import FloatLayout
 from functools import partial
+import plot
 
 CATALOG_ROOT = os.path.dirname(__file__)
 
@@ -61,142 +62,16 @@ class Mgraph(GridLayout):
             self.add_widget(wid)
             self.add_data()
         except Exception as e:
-            wid1, nv1 = self.plots()
-            self.add_widget(nv1.actionbar)
-            self.add_widget(wid1)
-            self.add_data()
-
-
-    def add_data(self):
-
-        self.d["ax0"].set_ylabel('Scores')
-        self.d["ax0"].set_title('Scores by group and gender')
-        for x in range(1, self.ind):
-            mind = "m"
-            mind += str(x)
-            axind = "ax"
-            axind += str(x)
-            self.d[axind].plot(self.d[mind][:, 0], self.d[mind][:, 1])
-        mind = "m"
-        axind = "ax"
-        mind += str(self.ind)
-        axind += str(self.ind)
-        self.d[mind] = self.rand_sin()
-        self.d[axind].plot(self.d[mind][:, 0], self.d[mind][:, 1])
-        self.ind = self.ind + 1
-        print(mind)
-
-        #print(self.d[mind])
+            #wid1, nv1 = self.plots()
+            #self.add_widget(nv1.actionbar)
+            #self.add_widget(wid1)
+            #self.add_data()
+            a = plot.runit2()
+            a.show()
+            
 
 
 
-    def plots(self):
-        global fig
-        fig = plt.figure()
-        for x in range(0, 11):
-            self.d["ax{0}".format(x)] = fig.add_subplot(111)
-
-        def enter_figure(event):
-            event.canvas.figure.patch.set_facecolor('red')
-            event.canvas.draw()
-
-        def leave_figure(event):
-            event.canvas.figure.patch.set_facecolor('blue')
-            event.canvas.draw()
-
-        global p_wid, nav
-
-        p_wid = FigureCanvas(fig)
-        fig.canvas.mpl_connect('figure_enter_event', enter_figure)
-        fig.canvas.mpl_connect('figure_leave_event', leave_figure)
-        nav = NavigationToolbar2Kivy(p_wid)
-        return p_wid, nav
-
-    def rand_sin(self):
-        x = np.linspace(0,101,num=100)
-        k = np.random.normal()
-        y = sin((x/ k))
-        m = [x, y]
-        m = np.reshape(m, (2, 100)).T
-        return m
-
-
-
-    def get_fc(self, i):
-        N = 5
-        menMeans = (20, 35, 30, 35, 27)
-        menStd = (2, 3, 4, 1, 2)
-
-        ind = np.arange(N)  # the x locations for the groups
-        width = 0.35  # the width of the bars
-
-        womenMeans = (25, 32, 34, 20, 25)
-        womenStd = (3, 5, 2, 3, 3)
-
-        A = [[44.254, 44.114, 44.353, 44.899, 45.082], [-0.934, 0.506, 1.389, 0.938, 0.881]]
-        fig, ax = plt.subplots()
-        #fig = plt.figure()
-        ax = fig.add_subplot(211)
-
-        ax2 = fig.add_subplot(212)
-        string = "hello"
-        string += str(i)
-        ax.text(0.6, 0.5, string, size=50, rotation=30.,
-                ha="center", va="center",
-                bbox=dict(boxstyle="round",
-                          ec=(1., 0.5, 0.5),
-                          fc=(1., 0.8, 0.8),
-                          )
-                )
-        rects1 = ax.bar(ind, menMeans, width, color='r', yerr=menStd)
-        rects2 = ax.bar(ind + width, womenMeans, width, color='y', yerr=womenStd)
-        # ax.bar(ind, menMeans, width, color='r', yerr=menStd)
-        # ax.bar(ind + width, womenMeans, width, color='y', yerr=womenStd)
-        ax.set_ylabel('Scores')
-        ax.set_title('Scores by group and gender')
-        ax.set_xticks(ind + width)
-        ax.set_xticklabels(('G1', 'G2', 'G3', 'G4', 'G5'))
-        ax.legend((rects1[0], rects2[0]), ('Men', 'Women'))
-
-        # fig.canvas.mpl_connect('button_press_event', press)
-        # fig.canvas.mpl_connect('button_release_event', release)
-        # fig.canvas.mpl_connect('key_press_event', keypress)
-        # fig.canvas.mpl_connect('key_release_event', keyup)
-        # fig.canvas.mpl_connect('motion_notify_event', motionnotify)
-        # fig.canvas.mpl_connect('resize_event', resize)
-        # fig.canvas.mpl_connect('scroll_event', scroll)
-        # fig.canvas.mpl_connect('figure_enter_event', figure_enter)
-        # fig.canvas.mpl_connect('figure_leave_event', figure_leave)
-        # fig.canvas.mpl_connect('close_event', close)
-
-
-
-        ax2.scatter(A[0], A[1], c='g')
-
-        my_mpl_kivy_widget = FigureCanvas(fig)
-
-
-        def enter_figure(event):
-            event.canvas.figure.patch.set_facecolor('red')
-            event.canvas.draw()
-
-        def leave_figure(event):
-            event.canvas.figure.patch.set_facecolor('blue')
-            event.canvas.draw()
-
-        global wid1
-
-        wid1 = my_mpl_kivy_widget
-        fig.canvas.mpl_connect('figure_enter_event', enter_figure)
-        fig.canvas.mpl_connect('figure_leave_event', leave_figure)
-
-        return wid1
-
-    def add_barplot(self):
-        self.add_widget(self.get_fc(7))
-
-    def add_AB(self):
-        self.add_widget(NavigationToolbar2Kivy(wid1).actionbar)
 
 CONTAINER_KVS = os.path.join(CATALOG_ROOT, 'container_kvs')
 CONTAINER_CLASSES = [c[:-3] for c in os.listdir(CONTAINER_KVS)
