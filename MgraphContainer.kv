@@ -1,0 +1,54 @@
+#:kivy 1.10
+
+
+Mgraph:
+    id: GLay
+    cols: 1
+    popup1: popup1.__self__
+    padding: '4sp'
+    canvas:
+        Color:
+            rgba: (0.1, 0.75, 0.3, .4)
+        Rectangle:
+            size: self.size
+            pos: self.pos
+
+    Button:
+        text: 'ADD'
+        size_hint: 1.0, 0.1
+        on_press: root.create_graph()
+    Button:
+        size_hint: (1, 0.2)
+        text: text1.text
+        on_release: root.popup1.open()
+
+    Popup:
+        id: popup1
+        on_parent: if self.parent == GLay: GLay.remove_widget(self)
+        title: "An example popup"
+        size_hint: (0.4, 0.6)
+        content: popupcontent
+
+        BoxLayout:
+            id: popupcontent
+            AnchorLayout:
+                anchor_y: 'top'
+                BoxLayout:
+                    size_hint: 1, 0.2
+                    TextInput:
+                        id: text1
+                        size_hint: 1, 1
+                        password: True
+                        text: "Password (but you can't see it)"
+                        multiline: False
+
+                    Button:
+                        text: 'OK'
+                        size_hint: 1, 1
+                        on_press: popup1.dismiss()
+
+
+
+
+
+

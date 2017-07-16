@@ -1,0 +1,62 @@
+#:kivy 1.10
+
+GridLayout:
+    cols: 1
+    padding: 10
+    canvas:
+        Color:
+            rgb: (0, 0, 0)
+    #BoxLayout:
+        #size_hint_y: 0.1
+    Video:
+        id: introvideo
+        size_hint: (1, 1)
+        source: '../BuyorRent/widgets/Luxury1.mp4'
+        #play: mybutton.state == 'down'
+
+    #Image:
+        #source: 'kivy.jpg'
+        #canvas:
+            #PushMatrix:
+            #Rotate:
+                #angle: 1
+            #BorderImage:
+                #border: 250, 250, 250, 250
+                #texture: self.texture
+                #size: self.texture_size
+            #PopMatrix:
+    BoxLayout:
+        size_hint_y: 0.15
+        Button:
+            id: mybutton
+            background_color: (.7, .7, 1, 1)
+            text: 'Play Video'
+            size_hint_y: 0.1
+            on_press: introvideo.play = 1
+        Button:
+            id: mybutton
+            background_color: (.7, .7, 1, 1)
+            text: 'Stop Video'
+            size_hint_y: 0.1
+            on_press: introvideo.play = 0
+
+    BoxLayout:
+        size_hint_y: 0.12
+        Slider:
+            size_hint: (1, 0.1)
+            min: 0
+            max: introvideo.duration
+            value: introvideo.position
+            pos: introvideo.pos
+
+    Label:
+        color: (1, 1, 1, 1)
+        font_size: '48sp'
+        size_hint_y: .2
+        text: "To[color=008000] Buy [/color][color=ff3333][b][sub]or[/sub][b][/color] [color=3333ff][b][sup]to[/sup][/color][color=ffff00]  Rent[/b][/color]?"
+        markup: True
+
+    #RstDocument:
+        #background_color: (1, 1, 1, 1)
+        #size_hint: (1, 0.4)
+        #text: "Welcome\n---------------\nThis Kivy Catalog is an interactive "

@@ -1,0 +1,146 @@
+#:kivy 1.10
+#:import KivyLexer kivy.extras.highlight.KivyLexer
+
+[ContainerToggle@ToggleButton]:
+    group: "container_toggle"
+    text: ctx.text
+    on_press: root.parent.parent.parent.show_kv(*args)
+    state: ctx.state if hasattr(ctx, "state") else "normal"
+
+<Container>:
+    canvas.before:
+        Color:
+            rgba: [0, 0, 0.1, 1]
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+<Catalog>:
+    id: catalog1
+    screen_manager: screen_manager
+    #auto_reload: chkbx.active
+    #info_label: info_lbl
+    orientation: 'vertical'
+    BoxLayout:
+        padding: '2sp'
+        canvas:
+            Color:
+                rgba: (0, 0, 0, 1)
+            Rectangle:
+                size: self.size
+                pos: self.pos
+        size_hint: 1, None
+        height: '45sp'
+        Spinner:
+            background_color: (.7, .7, 1, 1)
+            color: (1, 1, 1, 1)
+            size_hint: (0.6, 1)
+            width: '108sp'
+            text: 'Home'
+            values: [screen.name for screen in screen_manager.screens]
+            #on_text: root.show_kv(*args)
+        Label:
+            size_hint_y: 1
+            color: (1, 1, 1, 1)
+            font_size: '28sp'
+            halign: 'center'
+            valign: 'top'
+            text: "                                      To[color=008000] Buy [/color][color=ff3333][b] or [b][/color][color=3333ff][b] to [/b][/color][color=ffff00][b]  Rent[/b][/color]?[size=14]\n                                                    [font=impact]                                                                    ENTER YOUR DATA PEASANT![/font] [/size]"
+            markup: True
+        Widget:
+        #BoxLayout:
+            #size_hint: None, 1
+            #width: '150sp'
+            #Label:
+                #text: "Test"
+                #color: [0.1, 0.5, 0.2, 1]
+            #CheckBox:
+                #id: chkbx
+                #active: True
+                #size_hint_x: 1
+                #color: [1, 1, 1, 1]
+        Spinner:
+            background_color: (.7, .7, 1, 1)
+            color: (1, 1, 1, 1)
+            size_hint: (0.6, 1)
+            width: '108sp'
+            text: 'Page'
+            values: [screen.name for screen in screen_manager.screens]
+            on_text: root.show_kv(*args)
+
+    BoxLayout:
+        id: reactive_layout
+        orientation: 'vertical' if self.width < self.height else 'horizontal'
+        Splitter:
+            id: input_pane
+            #max_size: (reactive_layout.height if self.vertical else reactive_layout.width) - self.strip_size
+            #min_size: sp(30) + self.strip_size
+            vertical: 1 if reactive_layout.width < reactive_layout.height else 0
+            sizable_from: 'bottom' if self.vertical else 'right'
+            size_hint: (0.3, 1) if self.vertical else (0.3, 1)
+            #size: 150, 400
+            #on_vertical:
+                #mid_size = self.max_size/2
+                #if args[1]: self.height = mid_size
+                #if not args[1]: self.width = mid_size
+
+            ButtonContainer:
+
+        ScreenManager:
+            id: screen_manager
+            Screen:
+                name: "Box Layout"
+                BoxLayoutContainer:
+            Screen:
+                name: "Anchor Layout"
+                AnchorLayoutContainer:
+            Screen:
+                name: "Grid Layout"
+                GridLayoutContainer:
+            Screen:
+                name: "Stack Layout"
+                StackLayoutContainer:
+            Screen:
+                name: "Buttons"
+                ButtonContainer:
+            Screen:
+                name: "Labels"
+                LabelContainer:
+            Screen:
+                name: "Booleans"
+                CheckBoxContainer:
+            Screen:
+                name: "Progress Bar"
+                ProgressBarContainer:
+            Screen:
+                name: "Text"
+                TextContainer:
+            Screen:
+                name: "Popups"
+                PopupContainer:
+            Screen:
+                name: "Selectors"
+                SelectorsContainer:
+            Screen:
+                name: "File Choosers"
+                FileChooserContainer:
+            Screen:
+                name: "Scatter"
+                ScatterContainer:
+            Screen:
+                name: "ReST"
+                RestContainer:
+            Screen:
+                name: "Home"
+                HomeContainer:
+            Screen:
+                name: "Float Layout"
+                FloatLayoutContainer:
+            Screen:
+                name: "Graph Custom"
+                GraphContainer:
+            Screen:
+                name: "Graph Matplotlib"
+                MgraphContainer:
+
+
