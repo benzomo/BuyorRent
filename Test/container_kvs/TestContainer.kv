@@ -1,0 +1,31 @@
+
+
+<Screen>:
+    name: "table"
+    AnchorLayout:
+        anchor_y: 'top'
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint: (1, 1)
+            Button:
+                text: 'Populate list'
+                on_press: rv.populate()
+                size_hint_y: 0.1
+            Button:
+                text: 'Clear list'
+                on_press: rv.clear()
+                size_hint_y: 0.1
+            Table1:
+                id: rv
+                scroll_type: ['bars', 'content']
+                scroll_wheel_distance: dp(114)
+                bar_width: dp(10)
+                viewclass: 'Row'
+                RecycleGridLayout:
+                    cols: 3
+                    default_size: None, dp(56)
+                    default_size_hint: 1, None
+                    size_hint_y: None
+                    height: self.minimum_height
+                    orientation: 'vertical'
+                    spacing: dp(2)

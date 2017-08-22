@@ -1,0 +1,57 @@
+#:kivy 1.10
+
+
+GraphCustom:
+    id: graphC
+
+    Button:
+        size_hint: (1, 0.2)
+        text: text1.text
+        on_press: popup2.open()
+
+    Button:
+        text: 'DELETE'
+        size_hint: 1.0, 0.1
+        on_press: root.graph_remove()
+    Button:
+        text: 'ADD'
+        size_hint: 1.0, 0.1
+        on_press: root.graph_add()
+
+
+    Popup:
+        id: popup2
+        graphC: graphC.remove_widget(popup2)
+        title: "An example popup"
+        content: popupcontent
+        size_hint: (0.4, 0.6)
+        BoxLayout:
+            id: popupcontent
+            AnchorLayout:
+                anchor_y: 'top'
+                BoxLayout:
+                    size_hint: 1.0, 0.2
+                    TextInput:
+                        id: text1
+                        size_hint: 1, 1
+                        password: True
+                        text: "hfhgfghbrff"
+                        multiline: False
+
+                    Button:
+                        text: 'OK'
+                        size_hint: 1, 1
+                        on_press: popup2.dismiss()
+
+
+
+
+
+
+
+
+
+
+
+
+

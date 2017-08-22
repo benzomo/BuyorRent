@@ -1,0 +1,248 @@
+#:kivy 1.10
+
+
+GridLayout1:
+
+    cols: 1
+    padding: 10
+    canvas:
+        Color:
+            rgba: (204/256, 229/256, 255/256, 1)
+        Rectangle:
+            size: self.size
+            pos: self.pos
+    GridLayout:
+        cols: 2
+        size_hint: 1, 0.4
+        GridLayout:
+            size_hint: 1, 1
+            rows: 2
+            Button:
+                text: "Income"
+            Button:
+                text: "Expenses"
+        GridLayout:
+            size_hint: 1, 1
+            rows: 2
+            TextInput:
+                id: text_in1
+                size_hint: 1, 1
+                #password: True
+                font_size: 12
+                text: "enter income"
+                multiline: True
+
+            TextInput:
+                id: text_in2
+                size_hint: 1, 1
+                font_size: 10
+                #password: True
+                text: "enter non-Real Estate expenses"
+                multiline: True
+
+
+    Label:
+        size_hint: 1, 0.25
+        id: label_in1
+        text: '[color=000000]Enter Data!![/color]' if (text_in1.text == "enter \n income" or text_in2.text == "enter non-Real Estate expenses")  else 'Net Income = ' + str(root.calc(text_in1.text, text_in2.text))
+        markup: True
+
+    GridLayout:
+        cols: 1
+        size_hint: 1, 0.3
+        GridLayout:
+
+            rows: 2
+            Button:
+                text: "Savings"
+                font_size: 12
+                multiline: True
+            TextInput:
+                id: text_in3
+                size_hint: 1, 1
+                #password: True
+                font_size: 10
+                text: "enter Savings"
+                multiline: True
+
+        BoxLayout:
+            size_hint_y: 0.4
+
+            Widget:
+                size_hint_x: 0.7
+
+            Label:
+                size_hint_x: 0.6
+                text: "Buy a House to Live In?"
+                font_size: 16
+                color: (0/256, 51/256, 0/256, 1)
+                multiline: False
+            Widget:
+
+
+
+    TabbedPanel:
+        id: HouseTab
+        size_hint: (1, 0.7)
+        tab_width: 50
+        do_default_tab: False
+        TabbedPanelItem:
+            id: 'Hyes'
+            text: 'Yes'
+            background_color: (0/256, 255/256, 0/256, 0.5)
+            background_down: "0/256, 255/256, 0/256, 1"
+
+            BoxLayout:
+                size_hint: (1, 1)
+
+                GridLayout:
+                    size_hint: 1, 1
+                    rows: 3
+                    Button:
+                        background_color: (0/256, 255/256, 0/256, 0.5)
+                        text: "Mortgage \n Length"
+                        font_size: 12
+                        multiline: True
+                    Button:
+                        background_color: (0/256, 255/256, 0/256, 0.5)
+                        text: "Downpayment"
+                        font_size: 12
+                    Button:
+                        background_color: (0/256, 255/256, 0/256, 0.5)
+                        text: "Purchase Price"
+                        font_size: 12
+
+                GridLayout:
+                    size_hint: 1, 1
+                    rows: 3
+                    TextInput:
+                        id: text_in4
+                        background_color: (204/256, 255/256, 204/256, 1)
+                        size_hint: 1, 1
+                        #password: True
+                        font_size: 10
+                        text: "enter mortgage length"
+                        multiline: True
+
+                    TextInput:
+                        id: text_in5
+                        background_color: (204/256, 255/256, 204/256, 1)
+                        size_hint: 1, 1
+                        font_size: 10
+                        #password: True
+                        text: "enter down payment"
+                        multiline: True
+
+                    TextInput:
+                        id: text_in6
+                        background_color: (204/256, 255/256, 204/256, 1)
+                        size_hint: 1, 1
+                        font_size: 10
+                        #password: True
+                        text: "enter purchase price"
+                        multiline: True
+
+        TabbedPanelItem:
+            text: 'No'
+            background_color: (0/256, 255/256, 0/256, 0.5)
+            background_down: "0/256, 255/256, 0/256, 1"
+
+            BoxLayout:
+                size_hint: (1, 1)
+                RstDocument:
+                    background_color: (1, 1, 1, 1)
+                    #text: ".. _top:\n\nHello world\n===========\n\nThis is an **emphased text**, some ``interpreted text``.\nAnd this is a reference to top_::\n\n    $ print('Hello world')\n"
+                    text: "YOU ARE PAYING RENT (unless you are homeless)"
+
+
+
+    GridLayout:
+        cols: 1
+        size_hint: 1, 0.1
+        BoxLayout:
+            size_hint_y: 1
+
+            Label:
+                #size_hint_x: 0.9
+                text: "Buy Investment Property?"
+                font_size: 16
+                color: (255/256, 0/256, 255/256, 1)
+                multiline: True
+
+
+    TabbedPanel:
+        id: HouseTab
+        size_hint: (1, 0.7)
+        tab_width: 50
+        do_default_tab: False
+        TabbedPanelItem:
+            id: 'Hyes'
+            text: 'Yes'
+            background_color: (255/256, 0/256, 255/256, 0.5)
+            background_down: "255/256, 0/256, 255/256, 1"
+            BoxLayout:
+                size_hint: (1, 1)
+
+                GridLayout:
+                    size_hint: 1, 1
+                    rows: 3
+                    Button:
+                        background_color: (255/256, 0/256, 255/256, 0.5)
+                        text: "Mortgage \n Length"
+                        font_size: 12
+                        multiline: True
+                    Button:
+                        background_color: (255/256, 0/256, 255/256, 0.5)
+                        text: "Downpayment"
+                        font_size: 12
+                    Button:
+                        background_color: (255/256, 0/256, 255/256, 0.5)
+                        text: "Purchase Price"
+                        font_size: 12
+                GridLayout:
+                    size_hint: 1, 1
+                    rows: 3
+                    TextInput:
+                        id: text_in7
+                        background_color: (255/256, 204/256, 229/256, 1)
+                        size_hint: 1, 1
+                        #password: True
+                        font_size: 10
+                        text: "enter mortgage length"
+                        multiline: True
+
+                    TextInput:
+                        id: text_in8
+                        background_color: (255/256, 204/256, 229/256, 1)
+                        size_hint: 1, 1
+                        font_size: 10
+                        #password: True
+                        text: "enter down payment"
+                        multiline: True
+
+                    TextInput:
+                        id: text_in9
+                        background_color: (255/256, 204/256, 229/256, 1)
+                        size_hint: 1, 1
+                        font_size: 10
+                        #password: True
+                        text: "enter purchase price"
+                        multiline: True
+
+        TabbedPanelItem:
+            text: 'No'
+            background_color: (255/256, 0/256, 255/256, 0.5)
+            background_down: "255/256, 0/256, 255/256, 1"
+
+            BoxLayout:
+                size_hint: (1, 1)
+                RstDocument:
+                    background_color: (1, 1, 1, 1)
+                    text: "You invest in stocks, screw Real Estate"
+
+    #ToggleButton:
+        #text: "A toggle button"
+    #ToggleButton:
+        #text: "a toggle button in a group"
+        #group: "money"
+

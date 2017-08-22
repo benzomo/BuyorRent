@@ -1,0 +1,714 @@
+#:kivy 1.10
+
+HouseInput:
+    id: MVcont
+    bar_width: 12
+    scroll_type: ['bars', 'content']
+
+
+    TabbedPanel:
+        id: DataTabs
+        size_hint: (1, 2)
+        tab_height: 70
+        tab_width: 70
+        #tab_pos: 'left_top'
+        do_default_tab: False
+
+        TabbedPanelItem:
+            id: 'rates'
+            background_color: (0/256, 255/256, 255/256, 0.35) if self.state == 'normal' else (0/256, 255/256, 255/256, 1)
+            multiline: True
+            text: 'Rate Inputs'
+            font_size: 12
+            canvas.before:
+                PushMatrix
+                Rotate:
+                    angle: 90
+                    axis: 0,0,1
+                    origin: self.center
+                Rectangle:
+                    size: (self.parent.width, 200)
+
+            canvas.after:
+                PopMatrix
+
+
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint: (1, 1)
+                padding: 4
+                canvas:
+                    Color:
+                        rgba: (204/256, 229/256, 255/256, 1)
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+
+                Button:
+                    size_hint: (1, 0.025)
+                    text: 'Update'
+                    on_press: root.UpdateBtn(float(textin3.text), 25, 25, 0.04, 0.06, 0.04, 4, 4, 1300, 1300, 0.00075,0, 0, 0, 0, 0, 200, 200, 200, 200, 200, 200, 200, 200)
+
+                BoxLayout:
+                    size_hint: (1, 0.04)
+                    canvas:
+                        Color:
+                            rgba: (204/256, 229/256, 255/256, 1)
+                        Rectangle:
+                            size: self.size
+                            pos: self.pos
+
+                    Label:
+                        id: label1
+                        size_hint: (0.625, 1)
+                        text: 'Mortgage Rate \n (%)'
+                        multiline: 'true'
+                        color: (0, 0, 0, 1)
+                        font_size: 12
+                    TextInput:
+                        id: textin1
+                        size_hint: (0.375, 1)
+                        text: str(round(app.m_rate*100, 1))
+                        font_size: 12
+                        color: (0, 0, 0, 1)
+
+                BoxLayout:
+                    size_hint: (1, 0.04)
+                    canvas:
+                        Color:
+                            rgba: (204/256, 229/256, 255/256, 1)
+                        Rectangle:
+                            size: self.size
+                            pos: self.pos
+                    Label:
+                        id: label2
+                        size_hint: (0.625, 1)
+                        text: 'Investment \n Return (%)'
+                        multiline: 'true'
+                        color: (0, 0, 0, 1)
+                        font_size: 12
+                    TextInput:
+                        id: textin2
+                        size_hint: (0.375, 1)
+                        text: str(round(app.mkt_return*100, 1))
+                        font_size: 12
+                        color: (0, 0, 0, 1)
+                BoxLayout:
+                    size_hint: (1, 0.04)
+                    canvas:
+                        Color:
+                            rgba: (204/256, 229/256, 255/256, 1)
+                        Rectangle:
+                            size: self.size
+                            pos: self.pos
+                    Label:
+                        id: label3
+                        size_hint: (0.625, 1)
+                        text: 'Inflation (%)'
+                        multiline: 'true'
+                        color: (0, 0, 0, 1)
+                        font_size: 12
+                    TextInput:
+                        id: textin3
+                        size_hint: (0.375, 1)
+                        text: str(round(app.infl*100, 1))
+                        font_size: 12
+                        color: (0, 0, 0, 1)
+                BoxLayout:
+                    size_hint: (1, 0.04)
+                    canvas:
+                        Color:
+                            rgba: (204/256, 229/256, 255/256, 1)
+                        Rectangle:
+                            size: self.size
+                            pos: self.pos
+                    Label:
+                        id: label4
+                        size_hint: (0.625, 1)
+                        text: '30yr Real Price \n Appreciation (%)'
+                        multiline: 'true'
+                        color: (0, 0, 0, 1)
+                        font_size: 12
+                    TextInput:
+                        id: textin4
+                        size_hint: (0.375, 1)
+                        text: str(round(app.price_appr30*100, 1))
+                        font_size: 12
+                        color: (0, 0, 0, 1)
+
+                BoxLayout:
+                    size_hint: (1, 0.04)
+                    canvas:
+                        Color:
+                            rgba: (204/256, 229/256, 255/256, 1)
+                        Rectangle:
+                            size: self.size
+                            pos: self.pos
+                    Label:
+                        id: label5
+                        size_hint: (0.625, 1)
+                        text: 'Property Tax (%)'
+                        multiline: 'true'
+                        color: (0, 0, 0, 1)
+                        font_size: 12
+                    TextInput:
+                        id: textin5
+                        size_hint: (0.375, 1)
+                        text: str(round(app.prop_tax*100, 1))
+                        font_size: 12
+                        color: (0, 0, 0, 1)
+
+                Widget:
+
+
+
+
+        TabbedPanelItem:
+            id: 'purchase'
+            background_color: (0/256, 255/256, 255/256, 0.5) if self.state == 'normal' else (0/256, 255/256, 255/256, 1)
+            multiline: True
+            text: 'Purchase \n Inputs'
+            font_size: 12
+
+            canvas.before:
+                PushMatrix
+                Rotate:
+                    angle: 90
+                    axis: 0,0,1
+                    origin: self.center
+            canvas.after:
+                PopMatrix
+
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint: (1, 1)
+                padding: 4
+                canvas:
+                    Color:
+                        rgba: (204/256, 229/256, 255/256, 1)
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+                Button:
+                    size_hint: (1, 0.05)
+                    text: 'Update'
+                    on_press: root.update1(121)
+                BoxLayout:
+                    orientation: 'horizontal'
+                    size_hint: (1, 0.08)
+                    ToggleButton:
+                        id: tb1
+                        size_hint: (0.45, 1)
+                        #background_color: (0/256, 128/256, 0/256, 1)
+                        text: 'Buy Primary \n Residence'
+                        font_size: 12
+                        multiline: True
+                        on_press: root.buyprop(self.state)
+                    ToggleButton:
+                        id: tb2
+                        size_hint: (0.55, 1)
+                        #background_color: (255/256, 0/256, 255/256, 1)
+                        text: 'Buy Investment \n Property'
+                        font_size: 12
+                        multiline: True
+                        on_press: root.buypropI(self.state)
+
+                BoxLayout:
+                    orientation: 'horizontal'
+                    size_hint: (1, 0.05)
+                    canvas:
+                        Color:
+                            rgba: (0/256, 128/256, 0/256, 0.4)
+                        Rectangle:
+                            size: self.size
+                            pos: self.pos
+                    Label:
+
+                        text: "Primary Residence"
+                        font_size: 12
+                        multiline: True
+
+                BoxLayout:
+                    orientation: 'horizontal'
+                    size_hint: (1, 0.08)
+                    padding: 1
+                    canvas:
+                        Color:
+                            rgba: (0/256, 128/256, 0/256, 1)
+                        Rectangle:
+                            size: (self.size[0] - 1, self.size[1] - 1)
+                            pos: self.pos
+                    Label:
+                        text: "Mortgage \n Length"
+                        font_size: 12
+                        multiline: True
+                    TextInput:
+                        id: text_in10
+                        background_color: (204/256, 255/256, 204/256, 1)
+                        size_hint: 1, 1
+                        #password: True
+                        font_size: 10
+                        text: "enter mortgage length"
+                        multiline: True
+                        disabled: False if tb1.state == 'down' else True
+
+                BoxLayout:
+                    orientation: 'horizontal'
+                    size_hint: (1, 0.08)
+                    padding: 1
+                    canvas:
+                        Color:
+                            rgba: (0/256, 128/256, 0/256, 1)
+                        Rectangle:
+                            size: (self.size[0] - 1, self.size[1] - 1)
+                            pos: self.pos
+                    Label:
+                        text: "Wait X Years \n to Buy"
+                        font_size: 12
+                        multiline: True
+                    TextInput:
+                        id: text_in11
+                        background_color: (204/256, 255/256, 204/256, 1)
+                        size_hint: 1, 1
+                        #password: True
+                        font_size: 10
+                        text: "wait X years \n before buying"
+                        multiline: True
+                        disabled: False if tb1.state == 'down' else True
+
+                BoxLayout:
+                    orientation: 'horizontal'
+                    size_hint: (1, 0.08)
+                    padding: 1
+                    canvas:
+                        Color:
+                            rgba: (0/256, 128/256, 0/256, 1)
+                        Rectangle:
+                            size: (self.size[0] - 1, self.size[1] - 1)
+                            pos: self.pos
+                    Label:
+                        text: "Downpayment"
+                        font_size: 12
+                        multiline: True
+                    TextInput:
+                        id: text_in12
+                        background_color: (204/256, 255/256, 204/256, 1)
+                        size_hint: 1, 1
+                        #password: True
+                        font_size: 10
+                        text: "wait X years \n before buying"
+                        multiline: True
+                        disabled: False if tb1.state == 'down' else True
+
+                BoxLayout:
+                    orientation: 'horizontal'
+                    size_hint: (1, 0.08)
+                    padding: 1
+                    canvas:
+                        Color:
+                            rgba: (0/256, 128/256, 0/256, 1)
+                        Rectangle:
+                            size: (self.size[0] - 1, self.size[1] - 1)
+                            pos: self.pos
+                    Label:
+                        text: "Purchase Price"
+                        font_size: 12
+                        multiline: True
+                    TextInput:
+                        id: text_in13
+                        background_color: (204/256, 255/256, 204/256, 1)
+                        size_hint: 1, 1
+                        #password: True
+                        font_size: 10
+                        text: "wait X years \n before buying"
+                        multiline: True
+                        disabled: False if tb1.state == 'down' else True
+
+                BoxLayout:
+                    orientation: 'horizontal'
+                    size_hint: (1, 0.08)
+                    padding: 1
+                    canvas:
+                        Color:
+                            rgba: (0/256, 128/256, 0/256, 1)
+                        Rectangle:
+                            size: (self.size[0] - 1, self.size[1] - 1)
+                            pos: self.pos
+                    Label:
+                        text: "Condo/House/ \n Townhouse"
+                        font_size: 12
+                        multiline: True
+                    TextInput:
+                        id: text_in14
+                        background_color: (204/256, 255/256, 204/256, 1)
+                        size_hint: 1, 1
+                        #password: True
+                        font_size: 10
+                        text: "wait X years \n before buying"
+                        multiline: True
+                        disabled: False if tb1.state == 'down' else True
+
+                BoxLayout:
+                    orientation: 'horizontal'
+                    size_hint: (1, 0.08)
+                    padding: 1
+                    canvas:
+                        Color:
+                            rgba: (0/256, 128/256, 0/256, 1)
+                        Rectangle:
+                            size: (self.size[0] - 1, self.size[1] - 1)
+                            pos: self.pos
+                    Label:
+                        text: "Monthy \n Condo Fees ($)"
+                        font_size: 12
+                        multiline: True
+                    TextInput:
+                        id: text_in15
+                        background_color: (204/256, 255/256, 204/256, 1)
+                        size_hint: 1, 1
+                        #password: True
+                        font_size: 10
+                        text: "wait X years \n before buying"
+                        multiline: True
+                        disabled: False if tb1.state == 'down' else True
+
+                BoxLayout:
+                    orientation: 'horizontal'
+                    size_hint: (1, 0.08)
+                    padding: 1
+                    canvas:
+                        Color:
+                            rgba: (0/256, 128/256, 0/256, 1)
+                        Rectangle:
+                            size: (self.size[0] - 1, self.size[1] - 1)
+                            pos: self.pos
+                    Label:
+                        text: "Monthy \n Utilities ($)"
+                        font_size: 12
+                        multiline: True
+                    TextInput:
+                        id: text_in16
+                        background_color: (204/256, 255/256, 204/256, 1)
+                        size_hint: 1, 1
+                        #password: True
+                        font_size: 10
+                        text: "wait X years \n before buying"
+                        multiline: True
+                        disabled: False if tb1.state == 'down' else True
+
+                BoxLayout:
+                    orientation: 'horizontal'
+                    size_hint: (1, 0.05)
+
+                    canvas:
+                        Color:
+                            rgba: (255/256, 0/256, 255/256, 0.5)
+                        Rectangle:
+                            size: (self.size[0] - 1, self.size[1] - 1)
+                            pos: self.pos
+                    Label:
+                        text: "Investment Property"
+                        font_size: 12
+                        multiline: True
+
+                BoxLayout:
+                    orientation: 'horizontal'
+                    size_hint: (1, 0.08)
+                    padding: 1
+                    canvas:
+                        Color:
+                            rgba: (175/256, 0/256, 175/256, 1)
+                        Rectangle:
+                            size: (self.size[0]/2, self.size[1] - 2)
+                            pos: (self.pos[0], self.pos[1] + 1 )
+                    Label:
+                        text: "Mortgage \n Length"
+                        font_size: 12
+                        multiline: True
+                    TextInput:
+                        id: text_in20
+                        background_color: (255/256, 0/256, 255/256, 0.5)
+                        size_hint: 1, 1
+                        #password: True
+                        font_size: 10
+                        text: "enter mortgage length"
+                        multiline: True
+                        disabled: False if tb2.state == 'down' else True
+                BoxLayout:
+                    orientation: 'horizontal'
+                    size_hint: (1, 0.08)
+                    padding: 1
+                    canvas:
+                        Color:
+                            rgba: (175/256, 0/256, 175/256, 1)
+                        Rectangle:
+                            size: (self.size[0]/2, self.size[1] - 2)
+                            pos: (self.pos[0], self.pos[1] + 1 )
+                    Label:
+                        text: "Wait X Years \n to Buy"
+                        font_size: 12
+                        multiline: True
+                    TextInput:
+                        id: text_in21
+                        background_color: (255/256, 0/256, 255/256, 0.5)
+                        size_hint: 1, 1
+                        #password: True
+                        font_size: 10
+                        text: "wait X years \n before buying"
+                        multiline: True
+                        disabled: False if tb2.state == 'down' else True
+
+                BoxLayout:
+                    orientation: 'horizontal'
+                    size_hint: (1, 0.08)
+                    padding: 1
+                    canvas:
+                        Color:
+                            rgba: (175/256, 0/256, 175/256, 1)
+                        Rectangle:
+                            size: (self.size[0]/2, self.size[1] - 2)
+                            pos: (self.pos[0], self.pos[1] + 1 )
+                    Label:
+                        text: "Downpayment"
+                        font_size: 12
+                        multiline: True
+                    TextInput:
+                        id: text_in22
+                        background_color: (255/256, 0/256, 255/256, 0.5)
+                        size_hint: 1, 1
+                        #password: True
+                        font_size: 10
+                        text: "wait X years \n before buying"
+                        multiline: True
+                        disabled: False if tb2.state == 'down' else True
+
+                BoxLayout:
+                    orientation: 'horizontal'
+                    size_hint: (1, 0.08)
+                    padding: 1
+                    canvas:
+                        Color:
+                            rgba: (175/256, 0/256, 175/256, 1)
+                        Rectangle:
+                            size: (self.size[0]/2, self.size[1] - 2)
+                            pos: (self.pos[0], self.pos[1] + 1 )
+                    Label:
+                        text: "Purchase Price"
+                        font_size: 12
+                        multiline: True
+                    TextInput:
+                        id: text_in23
+                        background_color: (255/256, 0/256, 255/256, 0.5)
+                        size_hint: 1, 1
+                        #password: True
+                        font_size: 10
+                        text: "wait X years \n before buying"
+                        multiline: True
+                        disabled: False if tb2.state == 'down' else True
+
+                BoxLayout:
+                    orientation: 'horizontal'
+                    size_hint: (1, 0.08)
+                    padding: 1
+                    canvas:
+                        Color:
+                            rgba: (175/256, 0/256, 175/256, 1)
+                        Rectangle:
+                            size: (self.size[0]/2, self.size[1] - 2)
+                            pos: (self.pos[0], self.pos[1] + 1 )
+                    Label:
+                        text: "Condo/House/ \n Townhouse"
+                        font_size: 12
+                        multiline: True
+                    TextInput:
+                        id: text_in24
+                        background_color: (255/256, 0/256, 255/256, 0.5)
+                        size_hint: 1, 1
+                        #password: True
+                        font_size: 10
+                        text: "Condo"
+                        multiline: True
+                        disabled: False if tb2.state == 'down' else True
+
+                BoxLayout:
+                    orientation: 'horizontal'
+                    size_hint: (1, 0.08)
+                    padding: 1
+                    canvas:
+                        Color:
+                            rgba: (175/256, 0/256, 175/256, 1)
+                        Rectangle:
+                            size: (self.size[0]/2, self.size[1] - 2)
+                            pos: (self.pos[0], self.pos[1] + 1 )
+                    Label:
+                        text: "Monthly Condo \n Fees ($)"
+                        font_size: 12
+                        multiline: True
+                    TextInput:
+                        id: text_in25
+                        background_color: (255/256, 0/256, 255/256, 0.5)
+                        size_hint: 1, 1
+                        #password: True
+                        font_size: 10
+                        text: "Condo"
+                        multiline: True
+                        disabled: False if tb2.state == 'down' else True
+
+                BoxLayout:
+                    orientation: 'horizontal'
+                    size_hint: (1, 0.08)
+                    padding: 1
+                    canvas:
+                        Color:
+                            rgba: (175/256, 0/256, 175/256, 1)
+                        Rectangle:
+                            size: (self.size[0]/2, self.size[1] - 2)
+                            pos: (self.pos[0], self.pos[1] + 1 )
+                    Label:
+                        text: "Monthly Utility \n Costs ($)"
+                        font_size: 12
+                        multiline: True
+                    TextInput:
+                        id: text_in26
+                        background_color: (255/256, 0/256, 255/256, 0.5)
+                        size_hint: 1, 1
+                        #password: True
+                        font_size: 10
+                        text: "Condo"
+                        multiline: True
+                        disabled: False if tb2.state == 'down' else True
+
+                Widget:
+
+        TabbedPanelItem:
+            id: 'assets'
+            background_color: (0/256, 255/256, 255/256, 0.5) if self.state == 'normal' else (0/256, 255/256, 255/256, 1)
+            multiline: True
+            text: 'Income & \n Assets'
+            font_size: 12
+
+            canvas.before:
+                PushMatrix
+                Rotate:
+                    angle: 90
+                    axis: 0,0,1
+                    origin: self.center
+            canvas.after:
+                PopMatrix
+
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint: (1, 1)
+                padding: 10
+                canvas:
+                    Color:
+                        rgba: (204/256, 229/256, 255/256, 1)
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+                Button:
+                    size_hint: (1, 0.025)
+                    text: 'Update'
+                    on_press: root.update1(121)
+
+
+                BoxLayout:
+                    size_hint: (1, 0.04)
+                    Label:
+                        size_hint: (0.625, 1)
+                        text: 'Savings at \n t=0 ($)'
+                        multiline: True
+                        font_size: 13
+                        color: (0, 0, 0, 1)
+                    TextInput:
+                        id: textin30
+                        size_hint: (0.375, 1)
+                        text: '1500000'
+                        font_size: 12
+                        color: (0, 0, 0, 1)
+
+                BoxLayout:
+                    size_hint: (1, 0.04)
+                    Label:
+                        size_hint: (0.625, 1)
+                        text: 'Gross (After Tax) \n Income ($)'
+                        multiline: True
+                        font_size: 12
+                        color: (0, 0, 0, 1)
+                    TextInput:
+                        id: textin31
+                        size_hint: (0.375, 1)
+                        text: "1500000"
+                        font_size: 12
+                        color: (0, 0, 0, 1)
+                        disabled: False if NIb.state == 'normal' else True
+
+                BoxLayout:
+                    size_hint: (1, 0.04)
+                    Label:
+                        size_hint: (0.625, 1)
+                        text: 'Expenses excl. \n Housing Costs ($)'
+                        multiline: True
+                        font_size: 12
+                        color: (0, 0, 0, 1)
+                    TextInput:
+                        id: textin32
+                        size_hint: (0.375, 1)
+                        text: '1500'
+                        font_size: 12
+                        color: (0, 0, 0, 1)
+                        disabled: False if NIb.state == 'normal' else True
+
+
+
+                BoxLayout:
+                    orientation: 'vertical'
+                    size_hint: (1, 0.2)
+                    BoxLayout:
+                        size_hint: (1.2, 0.15)
+                        canvas:
+                            Color:
+                                rgba: (0/256, 0/256, 102/256, 1)
+                            Rectangle:
+                                size: self.size
+                                pos: (self.pos[0] - 20, self.pos[1])
+
+                    Label:
+                        size_hint: (1, 0.7)
+                        text: '[b]Enter Net Income Manually \n (After Tax Income Minus \n non-Real Estate Expenses)[b]'
+                        multiline: True
+                        font_size: 13
+                        markup: True
+                        color: (0, 0, 0, 1)
+
+
+                    BoxLayout:
+                        size_hint: (1, 0.35)
+                        ToggleButton:
+                            id: NIb
+                            size_hint: (0.625, 1)
+                            text: 'Enter Net Income'
+                            font_size: 12
+
+                        TextInput:
+                            id: textin31
+                            size_hint: (0.375, 1)
+                            text: "1500000"
+                            font_size: 12
+                            color: (0, 0, 0, 1)
+                            disabled: False if NIb.state == 'down' else True
+
+
+
+
+                    BoxLayout:
+                        size_hint: (1.2, 0.15)
+                        canvas:
+                            Color:
+                                rgba: (0/256, 0/256, 102/256, 1)
+                            Rectangle:
+                                size: self.size
+                                pos: (self.pos[0] - 20, self.pos[1])
+
+
+                Widget:

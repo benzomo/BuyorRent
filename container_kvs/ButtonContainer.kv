@@ -1,8 +1,16 @@
 #:kivy 1.10
 
 GridLayout:
-    cols: 2
+
+    cols: 1
     padding: 10
+    canvas:
+        Color:
+            rgba: (100/256, 100/256, 110/256, 1)
+        Rectangle:
+            size: self.size
+            pos: self.pos
+
     Button:
         text: "Button 1"
 

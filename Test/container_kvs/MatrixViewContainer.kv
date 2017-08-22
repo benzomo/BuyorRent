@@ -1,0 +1,156 @@
+#:kivy 1.10
+
+
+Mgraph:
+    id: GLay
+    cols: 1
+    popup1: popup1.__self__
+    popup2: popup2.__self__
+    padding: '4sp'
+    canvas:
+        Color:
+            rgba: (0, 51/256, 102/256, .4)
+        Rectangle:
+            size: self.size
+            pos: self.pos
+    BoxLayout:
+        orientation: 'vertical'
+        size_hint: (1.2, 0.9)
+
+        GridLayout:
+		    cols: 1
+			size_hint_y: 0.15
+			InputRatesHdr:
+			    id: hdr1
+				viewclass: 'Header'
+				do_scroll_y: False
+				do_scroll_x: True
+				#scroll_x: rv1.scroll_x
+				bar_width: 0.5
+				RecycleGridLayout:
+				    rows: 1
+					#default_size: None, dp(24)
+					default_size_hint: 1.2/app.colz, 1
+					size_hint_x: 0.4
+					#size_hint_y: 0.5
+					#height: self.minimum_height
+					orientation: 'horizontal'
+
+					spacing: dp(2)
+        ScrollView:
+
+            BoxLayout:
+                id: mything
+                orientation: 'horizontal'
+                size_hint: (0.4, 1)
+                InputRatesTblc2:
+
+                    id: rv1
+                    #scroll_type: ['bars', 'content']
+                    #bar_width: 15
+			        #bar_color: [0.9, 0.7, 0.9, 1]
+			        #bar_inactive_color: [0.9, 0.7, 0.9, .5]
+                    viewclass: 'Row'
+                    #do_scroll_x: True
+                    #do_scroll_y: False
+                    #scroll_y: rv2.scroll_y
+                    #scroll_x: hdr1.scroll_x
+                    RecycleGridLayout:
+                        cols: 1
+                        default_size: None, dp(50)
+                        default_size_hint: 1, None
+                        size_hint_y: None
+                        size_hint_x: 1
+                        height: self.minimum_height
+                        orientation: 'vertical'
+                        spacing: dp(2)
+
+                InputRatesTblc1:
+
+                    id: rv2
+                   #scroll_type: ['bars', 'content']
+                    #bar_width: 15
+			        #bar_color: [0.9, 0.7, 0.9, 1]
+			        #bar_inactive_color: [0.9, 0.7, 0.9, .5]
+                    viewclass: 'Row'
+                    #do_scroll_x: True
+                    do_scroll_y: False
+                    scroll_y: rv1.scroll_y
+                    RecycleGridLayout:
+                        cols: 1
+                        default_size: None, dp(50)
+                        default_size_hint: 1, None
+                        size_hint_y: None
+                        size_hint_x: 1
+                        height: self.minimum_height
+                        orientation: 'vertical'
+                        spacing: dp(2)
+
+    Button:
+        text: 'ADD'
+        size_hint: 1.0, 0.1
+        on_press: GLay.popup2.open(), mygraph.create_graph()
+        background_color: (0/256, 153/256, 153/256, 0.5)
+    Button:
+        size_hint: (1, 0.1)
+        text: text1.text
+        on_release: GLay.popup1.open()
+        background_color: (0/256, 153/256, 153/256, 0.5)
+
+
+    Popup:
+        id: popup2
+        on_parent: if self.parent == GLay: GLay.remove_widget(self)
+        title: "An example popup"
+        size_hint: (0.8, 0.9)
+        content: popupcontent2
+
+        BoxLayout:
+            id: popupcontent2
+            AnchorLayout:
+
+                anchor_y: 'top'
+
+                BoxLayout:
+                    orientation: 'vertical'
+                    size_hint: 1, 1
+
+                    Button:
+                        text: 'OK'
+                        size_hint: 1, 0.2
+                        on_press: popup2.dismiss()
+                    Mgraph:
+                        id: mygraph
+                        cols: 1
+                        size_hint: 1, 1
+
+
+    Popup:
+        id: popup1
+        on_parent: if self.parent == GLay: GLay.remove_widget(self)
+        title: "An example popup"
+        size_hint: (0.4, 0.6)
+        content: popupcontent
+
+        BoxLayout:
+            id: popupcontent
+            AnchorLayout:
+                anchor_y: 'top'
+                BoxLayout:
+                    size_hint: 1, 0.2
+                    TextInput:
+                        id: text1
+                        size_hint: 1, 1
+                        password: True
+                        text: "Password (but you can't see it)"
+                        multiline: False
+
+                    Button:
+                        text: 'OK'
+                        size_hint: 1, 1
+                        on_press: popup1.dismiss()
+
+
+
+
+

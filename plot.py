@@ -9,7 +9,7 @@ Created on Sat Jul 15 21:48:06 2017
 # a bar plot with errorbars
 import matplotlib
 from numpy import sin
-matplotlib.use('module://kivy.garden.matplotlib.backend_kivy')
+#matplotlib.use('module://kivy.garden.matplotlib.backend_kivy')
 #matplotlib.use('Gtk')
 
 import numpy as np
@@ -171,8 +171,8 @@ def runit2():
     ax.plot(m[:,0], m[:,1])
 
 
-    plt.draw()
+    #plt.draw()
     #fig1.set_size_inches(18.5, 10.5, forward = True)
-    plt.savefig("test.png")
+    #plt.savefig("test.png")
     #plt.show()
-    return plt
+    return plt, figure, ax

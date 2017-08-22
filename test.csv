@@ -1,0 +1,31 @@
+,Variable,Low,Med,High,VarName
+0,inflation,0.02,0.02,0.02,infl
+1,"Mortgage Term 
+ Residence",10,25,30,mterm_res
+2,"Mortgage Term 
+ Income Property",10,15,25,mterm_inc
+3,Mortgage Rate,0.03,0.04,0.05,rate_m
+4,"Stock Market 
+ Return",0.04,0.06,0.08,rate_mkt
+5,"Stock Market 
+ Return @ t = 0",0.025,0.04,0.05,rate_mkt0
+6,"Leverage 
+ (Residence)",1,4,9,lev_res
+7,"Leverage 
+ (Income Property)",1,4,9,lev_inc
+8,Rent Paid,1200,1300,1900,rent_paid
+9,Rental Income,1100,1650,1750,rent_income
+10,Property Tax (Rate),0.006,0.007,0.01,propTax
+11,Appreciation,0.01,0.02,0.03,appr_nominal
+12,Townhouse Maintenance,0.0025,0.0025,0.0025,maint_th
+13,House Maintenance,0.0075,0.0075,0.0075,maint_h
+14,Condo Maintenance,0.001,0.001,0.001,maint_c
+15,Appartment Maintenance,0,0,0,maint_ap
+16,Utilities-Townhouse,150,200,350,util_th
+17,Utilities-House,250,350,500,util_h
+18,Utilities-Condo,75,110,150,util_c
+19,Utilities-Appartment,0,0,0,util_ap
+20,Fees-Townhouse,100,200,300,fees_th
+21,Fees-House,0,0,0,fees_h
+22,Fees-Condo,375,500,650,fees_c
+23,Fees-Appartment,0,0,0,fees_ap

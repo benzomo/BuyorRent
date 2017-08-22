@@ -1,0 +1,379 @@
+#:kivy 1.10
+#:import KivyLexer kivy.extras.highlight.KivyLexer
+
+
+#:import Factory kivy.factory.Factory
+
+#:set color_button (.7, .7, 1, 0.7)
+#:set color_button_pressed (.7, .7, 1, 0.7)
+#:set color_font   (1, 1, 1, 1) 
+#:set color_header (.7, .7, 1, 0.3)
+
+<Button>
+    background_color: .7, .7, 1, 1
+
+
+<MySpinnerOption@SpinnerOption>:
+    background_color: color_button if self.state == 'down' else color_button_pressed
+    #background_down: 'atlas://data/images/defaulttheme/button'
+    color: color_font
+
+
+#[ContainerToggle@ToggleButton]:
+    #group: "container_toggle"
+    #text: ctx.text
+    #on_press: root.parent.parent.parent.show_kv(*args)
+    #state: ctx.state if hasattr(ctx, "state") else "normal"
+
+<Row@GridLayout>:
+    cols: app.colz
+    canvas.before:
+        Color:
+            rgba: 0.5, 0.5, 0.5, 0.3
+        Rectangle:
+            size: (self.size[0], self.size[1]*2 )
+
+            pos: self.pos
+    value: ''
+    Label:
+        text: root.value
+
+<Header@GridLayout>:
+    cols: app.colz
+    #size_hint: (1, 0.55 )
+    canvas.before:
+        Color:
+            rgba: (64/256, 64/256, 64/256, 0.6)
+        Rectangle:
+            size: (self.size[0], self.size[1]*0.55 )
+
+            pos: self.pos
+    value: ''
+    BoxLayout:
+        orientation: 'vertical'
+        Widget:
+        Label:
+            text: root.value
+            font_size: 12
+
+#<HeaderCell>
+#    size_hint: (None, None)
+#    height: 60
+#    width: 100
+
+#    text_size: self.size
+#    halign: "left"
+#    valign: "middle"
+#    background_disabled_normal: ''
+#    disabled_color: (1, 1, 1, 1)
+#    canvas.before:
+#        Color:
+#            rgba: 0.4, 0.165, 0.165, 1
+#        Rectangle:
+#            pos: self.pos
+#            size: self.size
+
+<TableHeader>:
+    header: header
+    #bar_width: 0
+    spacing: '1dp'
+
+    do_scroll: False
+    size_hint: (1, None)
+    #effect_cls: "ScrollEffect"
+    height: 60
+    GridLayout:
+        id: header
+        rows: 1
+        size_hint: (None, None)
+        width: self.minimum_width
+        height: self.minimum_height
+
+<ScrollCell>:
+    orientation: 'horizontal'
+    label: label
+    width: 200
+    #size: (200, 10)
+    text: ''
+    canvas.before:
+        Color:
+            rgba: [0.9, 0.23, 0.23, 1] if self.is_even else [0.9, 0.2, 0.2, 1]
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    Label:
+        id: label
+        text_size: None, self.height
+        size_hint: (None, 1)
+        width: self.texture_size[0]
+        text: root.text
+        padding_x: 10
+
+
+
+<TableData>:
+    rgrid: rgrid
+    bar_width: 25
+    scroll_type: ['bars']
+    bar_color: [0.9, 0.7, 0.9, 1]
+    bar_inactive_color: [0.9, 0.7, 0.9, .5]
+    #do_scroll_x: True
+    #do_scroll_y: True
+    viewclass: "ScrollCell"
+    RecycleGridLayout:
+        id: rgrid
+        rows: root.nrows
+        cols: root.ncols
+        size_hint: (None, None)
+        width: self.minimum_width
+        height: self.minimum_height
+
+
+<Container>:
+    canvas.before:
+        Color:
+            rgba: [0.9, 0.9, 0.9, 0.7]
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+<Catalog>:
+    id: catalog1
+    i: 1
+    screen_manager: screen_manager
+    screen_managerL: screen_managerL
+    #auto_reload: chkbx.active
+    #info_label: info_lbl
+    orientation: 'vertical'
+    BoxLayout:
+        padding: '2sp'
+        canvas:
+            Color:
+                rgba: (204/256, 229/256, 255/256, 1)
+            Rectangle:
+                size: self.size
+                pos: self.pos
+        size_hint: 1, None
+        height: '45sp'
+        #Widget:
+        Spinner:
+			background_color: color_button
+			option_cls: Factory.get("MySpinnerOption")
+			color: color_font
+			#values: [screen.name for screen in screen_managerL.screens]
+			values: ['Housing Compare', 'MV_Input', 'Budget'] if root.i == 1 else ['aaa', 'bbb']
+            size_hint: (0.8, 1)
+            width: '108sp'
+            text: 'Input_Panel'
+            on_text: root.screen_managerL.current = self.text
+        Label:
+            size_hint_y: 1
+            color: (1, 1, 1, 1)
+            font_size: '28sp'
+            halign: 'center'
+            valign: 'top'
+            text: "                                      To[color=008000] Buy [/color][color=ff3333][b] or [b][/color][color=3333ff][b] to [/b][/color][color=ffff00][b]  Rent[/b][/color]?[size=14]\n                                                    [font=impact]                                                                   [color=000000] ENTER YOUR DATA PEASANT![/color][/font] [/size]"
+            markup: True
+        Widget:
+        #BoxLayout:
+            #size_hint: None, 1
+            #width: '150sp'
+            #Label:
+                #text: "Test"
+                #color: [0.1, 0.5, 0.2, 1]
+            #CheckBox:
+                #id: chkbx
+                #active: True
+                #size_hint_x: 1
+                #color: [1, 1, 1, 1]
+
+
+
+
+        Spinner:
+			background_color: color_button
+			option_cls: Factory.get("MySpinnerOption")
+			color: color_font
+			values: [screen.name for screen in screen_manager.screens]
+            size_hint: (0.6, 1)
+            width: '108sp'
+            text: 'Page'
+            on_text: root.show_kv(*args)
+			
+
+    BoxLayout:
+        id: reactive_layout
+        orientation: 'vertical' if self.width < self.height else 'horizontal'
+
+        Splitter:
+            id: input_pane
+            #max_size: (reactive_layout.height if self.vertical else reactive_layout.width) - self.strip_size
+            #min_size: sp(30) + self.strip_size
+            vertical: 1 if reactive_layout.width < reactive_layout.height else 0
+            sizable_from: 'bottom' if self.vertical else 'right'
+            size_hint: (0.35, 1) if self.vertical else (0.35, 1)
+            #size: 150, 400
+            #on_vertical:
+                #mid_size = self.max_size/2
+                #if args[1]: self.height = mid_size
+                #if not args[1]: self.width = mid_size
+
+            ScreenManager:
+                id: screen_managerL
+                Screen:
+                    name: "Housing Compare"
+                    HousingInputContainer:
+                Screen:
+                    name: "Stack Layout"
+                    StackLayoutContainer:
+                Screen:
+                    name: "Budget"
+                    BudgetButtonContainer:
+                Screen:
+                    name: "MV_Input"
+                    MatrixViewInputContainer:
+
+
+        ScreenManager:
+            id: screen_manager
+            #Screen:
+                #name: "Box Layout"
+                #BoxLayoutContainer:
+            #Screen:
+                #name: "Anchor Layout"
+                #AnchorLayoutContainer:
+            #Screen:
+                #name: "Grid Layout"
+                #GridLayoutContainer:
+            #Screen:
+                #name: "Stack Layout"
+                #StackLayoutContainer:
+            Screen:
+                name: "Buttons"
+                ButtonContainer:
+            #Screen:
+                #name: "Labels"
+                #LabelContainer:
+            #Screen:
+                #name: "Booleans"
+                #CheckBoxContainer:
+            #Screen:
+                #name: "Progress Bar"
+                #ProgressBarContainer:
+            #Screen:
+                #name: "Text"
+                #TextContainer:
+            #Screen:
+                #name: "Popups"
+                #PopupContainer:
+            #Screen:
+                #name: "Selectors"
+                #SelectorsContainer:
+            #Screen:
+                #name: "File Choosers"
+                #FileChooserContainer:
+            #Screen:
+                #name: "Scatter"
+                #ScatterContainer:
+            #Screen:
+                #name: "ReST"
+                #RestContainer:
+
+            #Screen:
+                #name: "Float Layout"
+                #FloatLayoutContainer:
+
+            #Screen:
+                #name: "Home"
+                #HomeContainer:
+
+            Screen:
+                name: "Home"
+                HousingHomeContainer:
+
+            Screen:
+          
+
+                name: "table"
+
+                GridLayout:
+                    cols: 1
+
+					canvas:
+                        Color:
+                            rgba: (0, 51/256, 102/256, 1)
+						Rectangle:
+							size: self.size
+							pos: self.pos
+
+                    Splitter:
+                        horizontal: 1
+                        sizable_from: 'bottom'
+                        MgraphContainer:
+
+                    BoxLayout:
+
+                        orientation: 'vertical'
+                        size_hint: (1, 0.6)
+
+                        Button:
+                            text: 'Populate list'
+                            on_press: rv.populate(), hdr.populate()
+                            size_hint_y: 0.15
+                        Button:
+                            text: 'Clear list'
+                            on_press: rv.clear(), hdr.clear()
+                            size_hint_y: 0.15
+                        #TableX:
+                            #id: tx
+
+						GridLayout:
+						    cols: 1
+							size_hint_y: 0.15
+							TableH:
+								id: hdr
+								viewclass: 'Header'
+								do_scroll_y: False
+								do_scroll_x: True
+								scroll_x: rv.scroll_x
+								bar_width: 0.5
+								RecycleGridLayout:
+									rows: 1
+									#default_size: None, dp(24)
+									default_size_hint: 1, 1
+									size_hint_x: 1.5
+									height: self.minimum_height
+									orientation: 'vertical'
+									spacing: dp(2)
+
+
+                        Table1:
+
+                            id: rv
+                            scroll_type: ['bars', 'content']
+                            bar_width: 15
+							bar_color: [0.9, 0.7, 0.9, 1]
+							bar_inactive_color: [0.9, 0.7, 0.9, .5]
+                            viewclass: 'Row'
+                            do_scroll_x: True
+                            do_scroll_y: True
+                            scroll_x: hdr.scroll_x
+                            RecycleGridLayout:
+                                cols: 10
+                                default_size: None, dp(24)
+                                default_size_hint: 1, None
+                                size_hint_y: None
+                                size_hint_x: 1.5
+                                height: self.minimum_height
+                                orientation: 'vertical'
+                                spacing: dp(2)
+
+
+
+
+            Screen:
+                name: "Matrix"
+                MatrixViewContainer:
+
+

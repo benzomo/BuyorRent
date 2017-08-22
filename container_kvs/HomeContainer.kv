@@ -2,16 +2,20 @@
 
 GridLayout:
     cols: 1
-    padding: 10
+    padding: 0.5
     canvas:
         Color:
-            rgb: (0, 0, 0)
+            rgba: (0, 51/256, 102/256, .4)
+        Rectangle:
+            size: self.size
+            pos: self.pos
     #BoxLayout:
         #size_hint_y: 0.1
-    Video:
+    VideoPlayer:
         id: introvideo
         size_hint: (1, 1)
-        source: '../BuyorRent/widgets/Luxury1.mp4'
+        source: '../widgets/Luxury1.mp4'
+
         #play: mybutton.state == 'down'
 
     #Image:
